@@ -57,6 +57,7 @@ class PitchSlider {
             this.widgetWindow.destroy();
         };
 
+
         const MakeToolbar = (id) => {
             const toolBarDiv = document.createElement("div");
             this.widgetWindow._toolbar.appendChild(toolBarDiv);
@@ -132,6 +133,33 @@ class PitchSlider {
         for (const id in this.frequencies) {
             MakeToolbar(id);
         }
+
+        const widgetWindow = window.widgetWindows.windowFor(this, "pitchslider");
+        this.widgetWindow = widgetWindow;
+        widgetWindow.clear();
+        widgetWindow.show();
+
+        widgetWindow.onmaximize = () => {
+            if (widgetWindow._maximized) {
+                widgetWindow.getWidgetBody().style.position = "absolute";
+                widgetWindow.getWidgetBody().style.height = "calc(100vh - 80px)";
+                widgetWindow.getWidgetBody().style.width = "200vh";
+                docById("pitchsliderOuterDiv").style.height = "calc(100vh - 80px)";
+                docById("pitchsliderOuterDiv").style.width = "calc(200vh - 64px)";
+                docById("pitchsliderInnerDiv").style.width = "calc(200vh - 64px)";
+                docById("pitchsliderInnerDiv").style.height = "calc(100vh - 80px)";
+                widgetWindow.getWidgetBody().style.left = "70px";
+            } else {
+                widgetWindow.getWidgetBody().style.position = "relative";
+                widgetWindow.getWidgetBody().style.left = "0px";
+                widgetWindow.getWidgetBody().style.height = "400px";
+                widgetWindow.getWidgetBody().style.width = "400px";
+                // const innerDiv = docById("arpeggioInnerDiv");
+                innerDiv.style.height = widgetWindow.getWidgetBody().style.height;
+                innerDiv.style.width = widgetWindow.getWidgetBody().style.width;
+            }
+        };
+
 
         this.activity.textMsg(_("Click on the slider to create a note block."));
         setTimeout(this.widgetWindow.sendToCenter, 0);
