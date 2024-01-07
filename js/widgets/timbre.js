@@ -722,7 +722,7 @@ class TimbreWidget {
 
         this._playing = false;
 
-        const widgetWindow = window.widgetWindows.windowFor(this, "timbre", "timbre", false);
+        const widgetWindow = window.widgetWindows.windowFor(this, "timbre", "timbre", true);
         this.widgetWindow = widgetWindow;
         widgetWindow.clear();
         widgetWindow.show();
@@ -730,10 +730,10 @@ class TimbreWidget {
         const w = window.innerWidth;
         this._cellScale = w / 1200;
 
-        widgetWindow.getWidgetBody().append(this.timbreTableDiv);
-        widgetWindow.getWidgetBody().style.height = "500px";
-        widgetWindow.getWidgetBody().style.width = "600px";
-        widgetWindow.getWidgetBody().style.overflowY = "auto";
+        // widgetWindow.getWidgetBody().append(this.timbreTableDiv);
+        // widgetWindow.getWidgetBody().style.height = "500px";
+        // widgetWindow.getWidgetBody().style.width = "600px";
+        // widgetWindow.getWidgetBody().style.overflowY = "auto";
 
         widgetWindow.onclose = () => {
             this.activity.hideMsgs();
